@@ -1,0 +1,42 @@
+.status-badge {
+  min-width: 40px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  padding: 0 8px;
+  border-radius: 11px;
+  cursor: default;
+
+  @media screen and (max-width: 640px) {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  &_active {
+    background-color: $vz-green-light;
+    color: $vz-green;
+  }
+
+  &_inactive {
+    background-color: $vz-red-light;
+    color: $vz-red;
+  }
+
+  &_open {
+    background-color: $vz-red-light;
+    color: $vz-red;
+  }
+
+  &_progress {
+    background-color: $vz-yellow-light;
+    color: $vz-yellow;
+  }
+
+  &_closed {
+    background-color: $gray;
+    color: $dark-gray;
+  }
+}
