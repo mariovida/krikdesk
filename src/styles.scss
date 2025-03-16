@@ -13,9 +13,15 @@
 
 // Pages
 @import 'styles/pages/login';
+@import 'styles/pages/users';
 
 // Elements
+@import 'styles/elements/custom-table';
+@import 'styles/elements/search';
+@import 'styles/elements/badges';
 @import 'styles/elements/ticket-form';
+@import 'styles/elements/modals';
+@import 'styles/elements/custom-drawer';
 
 // Loader
 .loader {
