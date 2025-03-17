@@ -1,0 +1,111 @@
+.custom-modal {
+  .MuiPaper-root {
+    max-width: unset;
+    margin: 0 1rem;
+    padding: 24px;
+    border-radius: 16px;
+    background-color: $white;
+
+    h2,
+    .MuiDialogContent-root,
+    .MuiDialogActions-root {
+      padding: 0;
+    }
+
+    .MuiDialogTitle-root {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .MuiDialogContent-root {
+      .MuiInputBase-root {
+        font-weight: 400;
+        line-height: 1.4375em;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: rgb(17, 25, 39);
+        box-sizing: border-box;
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        background-color: transparent;
+        border-radius: 8px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        transition:
+          border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        border-color: rgb(229, 231, 235);
+
+        &:before,
+        &:after {
+          border: 0;
+        }
+      }
+    }
+  }
+
+  .MuiDialogActions-root {
+    width: 100%;
+
+    button {
+      &:last-of-type {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: 0 !important;
+  }
+
+  .MuiInputLabel-root {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: $dark-gray;
+
+    &.Mui-focused {
+      color: $dark-gray;
+    }
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0 40px 0;
+
+    .MuiFormHelperText-root {
+      font-family: 'Plus Jakarta Sans';
+      margin-top: 4px;
+      margin-left: 0;
+    }
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 17px;
+    text-transform: none;
+    color: $vz-red;
+    padding: 12px 16px;
+    border: 1px solid $vz-red;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .submit-btn {
+    color: $white;
+    background-color: $blue;
+    border-color: $blue;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
