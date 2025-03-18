@@ -1,0 +1,18 @@
+{
+  "welcome": "Dobrodošli",
+  "login": "Prijava",
+  "login.verificationError": "Vaš račun nije verificiran.",
+  "login.disabledError": "Ovaj račun je onemogućen.",
+  "login.mailError": "Račun s tim korisničkim imenom nije pronađen.",
+  "login.passwordError": "Unesena lozinka je pogrešna.",
+  "logout": "Odjava",
+  "login.username": "Korisničko ime",
+  "login.password": "Lozinka",
+  "login.submit": "Prijava",
+  "language": "Jezik",
+  "nav-home": "Početna",
+  "nav-projects": "Projekti",
+  "create-ticket-title": "Naslov",
+  "create-ticket-description": "Opis",
+  "create-ticket-submit": "Pošalji"
+}

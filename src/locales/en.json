@@ -1,0 +1,18 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "login.verificationError": "Your account hasn't been verified.",
+  "login.disabledError": "This account is disabled.",
+  "login.mailError": "No account found with that username.",
+  "login.passwordError": "Entered password is incorrect.",
+  "logout": "Logout",
+  "login.username": "Username",
+  "login.password": "Password",
+  "login.submit": "Log in",
+  "language": "Language",
+  "nav-home": "Home",
+  "nav-projects": "Projects",
+  "create-ticket-title": "Title",
+  "create-ticket-description": "Description",
+  "create-ticket-submit": "Submit"
+}

@@ -1,0 +1,24 @@
+// MUI RESET
+.MuiTypography-root,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+h1 {
+  font-size: $fs-36;
+}
+h2 {
+  font-size: $fs-32;
+}
+h4 {
+  font-size: $fs-28;
+}
+h5 {
+  font-size: $fs-24;
+}
