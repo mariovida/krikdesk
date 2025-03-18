@@ -8,10 +8,13 @@
     padding: 0;
   }
   .left-part {
+    flex-direction: column;
     background-color: $purple-lightest;
-    border-top-right-radius: 80px;
+    border-top-right-radius: 100px;
+    padding: 0 16px;
 
     p {
+      display: none;
       font-size: $fs-32;
       font-weight: 500;
 
@@ -24,17 +27,16 @@
     position: relative;
 
     &_lang {
-      display: flex;
-      gap: 12px;
       position: absolute;
       top: 12px;
       right: 12px;
 
       button {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
         background-color: transparent;
         border: 0;
+        padding: 0;
         cursor: pointer;
 
         img {
@@ -53,6 +55,7 @@
       h4 {
         font-weight: 700;
         margin-bottom: 32px;
+        cursor: default;
       }
 
       form {
