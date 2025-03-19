@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Menu, MenuItem, IconButton } from '@mui/material';
 
-import welcomeImage from '../assets/krikdesk-welcome.png';
+import welcomeImage from '../assets/krikdesk-welcome2.png';
 import croatiaFlag from '../assets/flag-croatia.png';
 import usaFlag from '../assets/flag-usa.png';
 
