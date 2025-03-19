@@ -36,6 +36,7 @@ const Users: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language');
@@ -101,7 +102,11 @@ const Users: React.FC = () => {
       first_name: firstName,
       last_name: lastName,
       email: email,
+      role: role,
     };
+
+    console.log(newUser);
+    return;
 
     try {
       const token = localStorage.getItem('accessToken');
@@ -165,7 +170,7 @@ const Users: React.FC = () => {
                           <TableCell>Email</TableCell>
                           <TableCell>Last login</TableCell>
                           <TableCell>Date created</TableCell>
-                          <TableCell></TableCell>
+                          <TableCell sx={{ width: '40px' }}></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -244,9 +249,11 @@ const Users: React.FC = () => {
         firstName={firstName}
         lastName={lastName}
         email={email}
+        role={role}
         setFirstName={setFirstName}
         setLastName={setLastName}
         setEmail={setEmail}
+        setRole={setRole}
       />
 
       <Drawer

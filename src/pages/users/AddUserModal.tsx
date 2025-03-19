@@ -7,7 +7,11 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  FormControl,
+  InputLabel,
   Button,
+  Select,
+  MenuItem,
 } from '@mui/material';
 
 interface AddUserModalProps {
@@ -21,9 +25,11 @@ interface AddUserModalProps {
   firstName: string;
   lastName: string;
   email: string;
+  role: string;
   setFirstName: React.Dispatch<React.SetStateAction<string>>;
   setLastName: React.Dispatch<React.SetStateAction<string>>;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setRole: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AddUserModal: React.FC<AddUserModalProps> = ({
@@ -33,25 +39,29 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   firstName,
   lastName,
   email,
+  role,
   setFirstName,
   setLastName,
   setEmail,
+  setRole,
 }) => {
   const [errors, setErrors] = useState({
     first_name: '',
     last_name: '',
     email: '',
+    role: '',
   });
 
   useEffect(() => {
     setFirstName('');
     setLastName('');
     setEmail('');
+    setRole('');
   }, [setFirstName, setLastName, setEmail]);
 
   const validateFields = () => {
     let isValid = true;
-    const newErrors = { first_name: '', last_name: '', email: '' };
+    const newErrors = { first_name: '', last_name: '', email: '', role: '' };
 
     if (!firstName.trim()) {
       newErrors.first_name = 'First name is required.';
@@ -77,6 +87,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
       isValid = false;
     }
 
+    if (!role) {
+      newErrors.role = 'Role is required.';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
@@ -90,6 +105,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
 
+  const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setRole(event.target.value as string);
+    setErrors((prevErrors) => ({ ...prevErrors, role: '' }));
+  };
+
   const handleSubmit = () => {
     if (validateFields()) {
       onSubmit({ first_name: firstName, last_name: lastName, email });
@@ -97,14 +117,16 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   };
 
   const handleClose = () => {
-    setErrors({ first_name: '', last_name: '', email: '' });
+    setErrors({ first_name: '', last_name: '', email: '', role: '' });
     setFirstName('');
     setLastName('');
     setEmail('');
+    setRole('');
     onClose();
   };
 
-  const isSaveDisabled = firstName === '' || lastName === '' || email === '';
+  const isSaveDisabled =
+    firstName === '' || lastName === '' || email === '' || !role;
 
   return (
     <Dialog
@@ -156,9 +178,32 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             variant="filled"
             required
           />
+          <FormControl
+            fullWidth
+            variant="filled"
+            required
+            error={!!errors.role}
+          >
+            <InputLabel id="user-role-label">Role</InputLabel>
+            <Select
+              labelId="user-role-label"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <MenuItem value="admin">Administrator</MenuItem>
+              <MenuItem value="developer">Developer</MenuItem>
+              <MenuItem value="designer">Designer</MenuItem>
+              <MenuItem value="client">Client</MenuItem>
+              <MenuItem value="reporter">Account manager</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions
+        sx={{
+          justifyContent: 'space-between',
+        }}
+      >
         <Button onClick={handleClose} className="cancel-btn">
           Cancel
         </Button>
