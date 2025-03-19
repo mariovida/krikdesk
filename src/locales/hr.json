@@ -12,7 +12,10 @@
   "language": "Jezik",
   "nav-home": "Početna",
   "nav-projects": "Projekti",
+  "nav-users": "Korisnici",
   "create-ticket-title": "Naslov",
   "create-ticket-description": "Opis",
+  "create-ticket-assignee": "Osoba",
+  "create-ticket-priority": "Prioritet",
   "create-ticket-submit": "Pošalji"
 }

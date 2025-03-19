@@ -1,16 +1,21 @@
 // Utils
 @import 'styles/utils/variables';
+@import 'styles/utils/inputs';
 
 // Base
 @import 'styles/base/reset';
 @import 'styles/base/typography';
 
 // Components
+@import 'styles/components/top-header';
 @import 'styles/components/header';
 @import 'styles/components/footer';
 
 // Pages
 @import 'styles/pages/login';
+
+// Elements
+@import 'styles/elements/ticket-form';
 
 // Loader
 .loader {
@@ -19,7 +24,7 @@
   left: 0;
   width: 100vw;
   height: 8px;
-  background: linear-gradient(90deg, #674fb0 33%, #8672c0 50%, #674fb0 69%)
+  background: linear-gradient(90deg, #446688 33%, #779abb 50%, #446688 69%)
     #f2f2f2;
   background-size: 300% 100%;
   animation: l1 1s infinite linear;

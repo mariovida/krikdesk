@@ -15,15 +15,23 @@ body {
   max-width: 1280px;
   margin: 0 auto;
 }
-input {
+input,
+textarea,
+select {
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.verification-error {
+  font-size: $fs-15;
+  font-weight: 500;
+  color: $error-red;
 }
 
 // Language menu
 
 .lang-menu .MuiPaper-root {
   min-width: 90px;
-  margin-top: 5px;
+  margin-top: 10px;
+  box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
 
   .MuiList-root {
     padding: 6px;

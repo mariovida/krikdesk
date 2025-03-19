@@ -12,7 +12,10 @@
   "language": "Language",
   "nav-home": "Home",
   "nav-projects": "Projects",
+  "nav-users": "Users",
   "create-ticket-title": "Title",
   "create-ticket-description": "Description",
+  "create-ticket-assignee": "Assignee",
+  "create-ticket-priority": "Priority",
   "create-ticket-submit": "Submit"
 }

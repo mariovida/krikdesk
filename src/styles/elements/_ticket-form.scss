@@ -1,0 +1,36 @@
+.ticket-form {
+  form {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 auto;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input,
+    textarea {
+      font-size: $fs-16;
+      padding: 12px 10px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 0;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    select {
+      font-size: $fs-16;
+      padding: 6px 10px;
+    }
+  }
+}

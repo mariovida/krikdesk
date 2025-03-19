@@ -27,6 +27,7 @@ const LoginPage = () => {
   const [errorMail, setErrorMail] = useState(false);
   const [errorDisabled, setErrorDisabled] = useState(false);
   const [error, setError] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -77,8 +78,16 @@ const LoginPage = () => {
     if (response.ok && data.accessToken) {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', JSON.stringify(data.user));
+      setErrorMail(false);
+      setErrorVerification(false);
+      setErrorDisabled(false);
+      setError(false);
       setUser(data.user);
-      navigate('/');
+      setShowSpinner(true);
+      setTimeout(() => {
+        setShowSpinner(false);
+        navigate('/');
+      }, 1000);
     } else {
       setErrorMail(data.error === 'User not found');
       setErrorVerification(data.error === 'Account not verified');
@@ -113,6 +122,7 @@ const LoginPage = () => {
                   src={currentLanguage === 'hr' ? croatiaFlag : usaFlag}
                   alt={currentLanguage === 'hr' ? 'Croatia Flag' : 'USA Flag'}
                   className="current-lang-flag"
+                  style={{ width: '32px', height: '32px' }}
                 />
               </IconButton>
               <Menu
@@ -143,7 +153,10 @@ const LoginPage = () => {
               </button> */}
             </Box>
             <Box className="right-part_box">
-              <Typography variant="h4">{i18n.t('login')}</Typography>
+              <Typography variant="h4">
+                {i18n.t('login')}{' '}
+                {showSpinner && <span className="spinner"></span>}
+              </Typography>
               <form onSubmit={handleLogin}>
                 {errorVerification && (
                   <div className="verification-error">

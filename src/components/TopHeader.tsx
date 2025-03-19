@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Menu, MenuItem, IconButton } from '@mui/material';
+import { Menu, MenuItem, IconButton, Typography } from '@mui/material';
 import { useUser } from '../context/UserContext';
-import { useTranslation } from 'react-i18next';
 
-import croatiaFlag from '../assets/flag-croatia.png';
-import usaFlag from '../assets/flag-usa.png';
+import krikLogo from '../assets/logo.svg';
 
 const TopHeader: React.FC = () => {
-  const { i18n } = useTranslation();
   const { setUser } = useUser();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const currentLanguage = i18n.language;
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
-      i18n.changeLanguage(savedLanguage);
-    }
-  }, [i18n]);
-
-  const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang);
-    localStorage.setItem('language', lang);
-    setAnchorEl(null);
-  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,52 +25,31 @@ const TopHeader: React.FC = () => {
   };
 
   return (
-    <header className="header-top">
+    <header className="top-header">
       <div className="wrapper">
         <div className="row">
           <div className="col-12">
-            <nav>
+            <div className="top-header_content">
               <div>
-                <NavLink to="/">{i18n.t('nav-home')}</NavLink>
-                <NavLink to="/projects">{i18n.t('nav-projects')}</NavLink>
-                <button onClick={handleLogout}>Logout</button>
+                <img src={krikLogo} alt="Krik studio logo" />
+                <Typography>Ticketing</Typography>
               </div>
-              <div className="header-top_lang">
-                <IconButton
-                  onClick={handleMenuOpen}
-                  className="current-lang-btn"
-                >
-                  <img
-                    src={currentLanguage === 'hr' ? croatiaFlag : usaFlag}
-                    alt={currentLanguage === 'hr' ? 'Croatia Flag' : 'USA Flag'}
-                    className="current-lang-flag"
-                  />
-                </IconButton>
-
-                {/* Language selection dropdown menu */}
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                  className="lang-menu"
-                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >
-                  <MenuItem onClick={() => changeLanguage('hr')}>
-                    <img
-                      src={croatiaFlag}
-                      alt="Croatia Flag"
-                      className="flag-icon"
-                    />
-                    HRV
-                  </MenuItem>
-                  <MenuItem onClick={() => changeLanguage('en')}>
-                    <img src={usaFlag} alt="USA Flag" className="flag-icon" />
-                    ENG
-                  </MenuItem>
-                </Menu>
-              </div>
-            </nav>
+              <IconButton
+                onClick={handleMenuOpen}
+                className="avatar"
+              ></IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                className="lang-menu"
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                <MenuItem>Settings</MenuItem>
+                <MenuItem>Account</MenuItem>
+              </Menu>
+            </div>
           </div>
         </div>
       </div>
