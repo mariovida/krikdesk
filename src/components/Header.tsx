@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                 <NavLink to="/">{i18n.t('nav-home')}</NavLink>
                 <NavLink to="/projects">{i18n.t('nav-projects')}</NavLink>
                 <NavLink to="/users">{i18n.t('nav-users')}</NavLink>
-                <button onClick={handleLogout}>{i18n.t('logout')}</button>
+                {/* <button onClick={handleLogout}>{i18n.t('logout')}</button> */}
               </div>
               <div className="header_lang">
                 <IconButton

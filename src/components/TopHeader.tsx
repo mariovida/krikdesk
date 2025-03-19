@@ -1,12 +1,19 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Menu, MenuItem, IconButton, Typography } from '@mui/material';
+import {
+  Box,
+  Menu,
+  MenuItem,
+  IconButton,
+  Typography,
+  Divider,
+} from '@mui/material';
 import { useUser } from '../context/UserContext';
 
 import krikLogo from '../assets/logo.svg';
 
 const TopHeader: React.FC = () => {
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -34,10 +41,10 @@ const TopHeader: React.FC = () => {
                 <img src={krikLogo} alt="Krik studio logo" />
                 <Typography>Ticketing</Typography>
               </div>
-              <IconButton
-                onClick={handleMenuOpen}
-                className="avatar"
-              ></IconButton>
+              <IconButton onClick={handleMenuOpen} className="avatar">
+                {user?.first_name?.charAt(0).toUpperCase()}
+                {user?.last_name?.charAt(0).toUpperCase()}
+              </IconButton>
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
@@ -46,8 +53,17 @@ const TopHeader: React.FC = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
+                <Box className="user-info">
+                  <p>
+                    {user?.first_name} {user?.last_name}
+                  </p>
+                  <p>{user?.email}</p>
+                </Box>
+                <Divider />
                 <MenuItem>Settings</MenuItem>
                 <MenuItem>Account</MenuItem>
+                <Divider />
+                <MenuItem onClick={handleLogout}>Sign out</MenuItem>
               </Menu>
             </div>
           </div>
