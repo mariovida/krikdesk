@@ -1,6 +1,6 @@
 .users {
   &-drawer {
-    padding: 16px;
+    padding: 20px;
 
     &_table {
       border: 1px solid $gray;
@@ -21,7 +21,7 @@
       }
 
       &_title {
-        width: 140px;
+        width: 150px;
         font-weight: 400 !important;
         color: $dark-gray;
         cursor: default;

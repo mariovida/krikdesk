@@ -2,7 +2,7 @@
   flex-shrink: 0;
 
   & .MuiPaper-root {
-    min-width: 500px;
+    min-width: 520px;
     height: 94vh;
     margin-top: 3vh;
     margin-right: 24px;
@@ -10,6 +10,12 @@
     box-shadow:
       rgba(0, 0, 0, 0.04) 0px 5px 22px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+    @media screen and (max-width: 640px) {
+      min-width: unset;
+      width: 96vw;
+      margin: 3vh 2vw;
+    }
   }
 
   &_title {

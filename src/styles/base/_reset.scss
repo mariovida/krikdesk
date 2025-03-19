@@ -31,7 +31,6 @@ button,
 }
 
 // Language menu
-
 .lang-menu,
 .user-menu {
   .MuiPaper-root {
@@ -61,6 +60,70 @@ button,
           margin-bottom: 0;
         }
       }
+    }
+  }
+}
+
+.user-menu {
+  .MuiPaper-root {
+    min-width: 240px;
+
+    .MuiList-root {
+      padding: 12px !important;
+
+      li:last-child {
+        display: block;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .MuiDivider-root {
+    margin-bottom: 8px;
+  }
+
+  .user-info {
+    color: $dark-gray;
+    margin-bottom: 12px;
+
+    p {
+      cursor: default;
+      user-select: none;
+      pointer-events: none;
+
+      &:first-child {
+        font-size: $fs-16;
+        font-weight: 600;
+        color: $text-color;
+      }
+      &:last-child {
+        font-size: $fs-14;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.MuiList-root {
+  padding: 10px !important;
+  // border-radius: 16px;
+  box-shadow:
+    rgba(0, 0, 0, 0.04) 0px 5px 22px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  li {
+    min-height: unset;
+    font-family: 'Plus Jakarta Sans';
+    font-size: $fs-15;
+    line-height: 20px;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    border-radius: 6px;
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }

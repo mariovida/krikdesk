@@ -96,7 +96,9 @@
     border: 1px solid $vz-red;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s;
+    transition:
+      opacity 0.2s,
+      background-color 0.2s;
   }
 
   .submit-btn {
@@ -107,5 +109,9 @@
     &:hover {
       opacity: 0.9;
     }
+  }
+
+  .cancel-btn:hover {
+    background-color: $vz-red-light;
   }
 }

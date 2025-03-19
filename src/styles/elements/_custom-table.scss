@@ -115,16 +115,17 @@
 
         button {
           display: inline-flex;
-          justify-content: flex-end;
+          justify-content: center;
           align-items: center;
-          width: 23px;
-          height: 23px;
+          width: 32px;
+          height: 32px;
+          padding: 0;
           background-color: transparent;
           border: 0;
 
           img {
-            width: 17px;
-            height: 17px;
+            width: 18px;
+            height: 18px;
           }
         }
 
