@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import TopHeader from '../components/TopHeader';
 
 const LoginPage = lazy(() => import('../pages/Login'));
+const SetPasswordPage = lazy(() => import('../pages/SetPasswordPage'));
 
 const HomePage = lazy(() => import('../pages/Home'));
 const ProjectsPage = lazy(() => import('../pages/Projects'));
@@ -15,6 +16,10 @@ const routes: RouteObject[] = [
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/password-create',
+    element: <SetPasswordPage />,
   },
   {
     element: (
