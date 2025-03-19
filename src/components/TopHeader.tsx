@@ -42,7 +42,7 @@ const TopHeader: React.FC = () => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
-                className="lang-menu"
+                className="user-menu"
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
