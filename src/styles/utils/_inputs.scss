@@ -3,4 +3,53 @@
   .MuiSelect-root {
     background-color: transparent !important;
   }
+
+  .MuiInputLabel-root {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: $dark-gray;
+
+    &.Mui-focused {
+      color: $dark-gray;
+    }
+  }
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .MuiFormHelperText-root {
+    font-family: 'Plus Jakarta Sans';
+    margin-top: 4px;
+    margin-left: 0;
+  }
+
+  .MuiInputBase-root {
+    font-weight: 400;
+    line-height: 1.4375em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: rgb(17, 25, 39);
+    box-sizing: border-box;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    background-color: transparent;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    transition:
+      border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-color: rgb(229, 231, 235);
+
+    &:before,
+    &:after {
+      border: 0;
+      border-bottom: 0 !important;
+    }
+  }
 }

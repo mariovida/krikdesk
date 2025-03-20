@@ -24,4 +24,14 @@
     margin-bottom: 16px !important;
     user-select: none;
   }
+
+  &_close-btn {
+    background-color: $light-gray;
+  }
+
+  &_red-btn {
+    flex: 1;
+    color: $white;
+    background-color: $error-red;
+  }
 }

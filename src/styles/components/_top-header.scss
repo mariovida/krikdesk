@@ -26,10 +26,18 @@
     .avatar {
       width: 52px;
       height: 52px;
-      font-size: $fs-16;
+      font-family: 'Plus Jakarta Sans';
+      font-size: $fs-20;
+      font-weight: 600;
       background-color: $white;
-      padding: 0;
+      color: $blue-dark;
+      padding: 6px;
       border: 2px solid $white;
+
+      &:hover {
+        background-color: $gray;
+        border-color: $gray;
+      }
     }
   }
 }

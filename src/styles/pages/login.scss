@@ -110,25 +110,25 @@
       }
     }
   }
+}
 
-  .spinner {
-    width: 30px;
-    height: 30px;
-    border: 4px solid $blue-lightest;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    margin-left: 20px;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid $blue-lightest;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  margin-left: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
   }
-
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
   }
 }

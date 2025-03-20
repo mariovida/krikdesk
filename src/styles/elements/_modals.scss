@@ -16,6 +16,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 24px;
       font-weight: 700;
+      margin-bottom: 24px;
     }
 
     .MuiDialogContent-root {
@@ -50,6 +51,7 @@
 
   .MuiDialogActions-root {
     width: 100%;
+    margin-top: 40px;
 
     button {
       &:last-of-type {
@@ -68,19 +70,6 @@
 
     &.Mui-focused {
       color: $dark-gray;
-    }
-  }
-
-  .form-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin: 24px 0 40px 0;
-
-    .MuiFormHelperText-root {
-      font-family: 'Plus Jakarta Sans';
-      margin-top: 4px;
-      margin-left: 0;
     }
   }
 

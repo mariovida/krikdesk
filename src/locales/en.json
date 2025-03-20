@@ -18,5 +18,6 @@
   "create-ticket-description": "Description",
   "create-ticket-assignee": "Assignee",
   "create-ticket-priority": "Priority",
+  "create-ticket-project": "Project",
   "create-ticket-submit": "Submit"
 }

@@ -1,0 +1,22 @@
+.projects {
+  &-list {
+    .table-custom_list--item {
+      button {
+        width: 100%;
+        letter-spacing: 0.5px;
+        padding: 10px 20px;
+        // color: $blue;
+        // background-color: transparent;
+        transition:
+          color 0.2s,
+          background-color 0.2s;
+
+        &:hover {
+          opacity: 1;
+          color: $blue;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

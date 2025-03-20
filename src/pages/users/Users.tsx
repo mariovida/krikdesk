@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -25,12 +26,14 @@ const Users: React.FC = () => {
   }
 
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
   const [users, setUsers] = useState<any[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [openModal, setOpenModal] = useState(false);
   const [firstName, setFirstName] = useState('');
@@ -56,7 +59,17 @@ const Users: React.FC = () => {
         setUsers(response.data.users);
         setFilteredUsers(response.data.users);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        if (
+          axios.isAxiosError(error) &&
+          error.response &&
+          error.response.status &&
+          error.response.status === 403
+        ) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('user');
+          navigate('/login');
+        }
+        // console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
@@ -93,6 +106,16 @@ const Users: React.FC = () => {
   };
 
   const handleCloseDrawer = () => {
+    setOpenDrawer(false);
+    setSelectedUser(null);
+  };
+
+  const handleOpenConfirm = () => {
+    setConfirmOpen(true);
+  };
+
+  const handleDeactivateUser = () => {
+    setConfirmOpen(false);
     setOpenDrawer(false);
     setSelectedUser(null);
   };
@@ -150,6 +173,9 @@ const Users: React.FC = () => {
         <div className="wrapper">
           <div className="row">
             <div className="col-12">
+              <h1>Users</h1>
+            </div>
+            <div className="col-12">
               <div className="table-custom_box">
                 <div className="table-custom_head">
                   <input
@@ -158,7 +184,12 @@ const Users: React.FC = () => {
                     value={searchQuery}
                     onChange={handleSearch}
                   />
-                  <button onClick={handleOpenCreateUserModal}>Add new</button>
+                  <button
+                    className="vx-button vx-button--primary"
+                    onClick={handleOpenCreateUserModal}
+                  >
+                    Add new
+                  </button>
                 </div>
                 <div className="table-custom_table">
                   <TableContainer>
@@ -225,10 +256,10 @@ const Users: React.FC = () => {
                         ) : (
                           <TableRow>
                             <TableCell
-                              colSpan={4}
+                              colSpan={6}
                               sx={{ textAlign: 'center !important' }}
                             >
-                              No users found with the query
+                              No users found
                             </TableCell>
                           </TableRow>
                         )}
@@ -263,59 +294,114 @@ const Users: React.FC = () => {
         className="custom-drawer"
       >
         <Box className="users-drawer">
-          <Typography className="custom-drawer_title">User details</Typography>
-          {selectedUser && (
-            <Box className="users-drawer_table">
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  First name
+          <Box className="users-drawer_actions">
+            <Box sx={{ display: 'flex', gap: '20px' }}>
+              <button
+                className="vx-button custom-drawer_close-btn"
+                onClick={handleCloseDrawer}
+              >
+                Close
+              </button>
+              <button
+                className="vx-button custom-drawer_red-btn"
+                onClick={handleOpenConfirm}
+              >
+                Deactivate user
+              </button>
+            </Box>
+            {confirmOpen && (
+              <Box className="users-drawer_actions--confirm">
+                <Typography>
+                  Are you sure you want to deactivate this user?
                 </Typography>
-                <Typography className="users-drawer_table_text">
-                  {selectedUser.first_name}
-                </Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    gap: '20px',
+                  }}
+                >
+                  <button
+                    onClick={() => setConfirmOpen(false)}
+                    className="vx-button"
+                  >
+                    Cancel
+                  </button>
+                  <button onClick={handleDeactivateUser} className="vx-button">
+                    Confirm
+                  </button>
+                </Box>
               </Box>
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  Last name
-                </Typography>
-                <Typography className="users-drawer_table_text">
-                  {selectedUser.last_name}
-                </Typography>
+            )}
+          </Box>
+          <Box className="users-drawer_content">
+            <Typography className="custom-drawer_title">
+              User details
+            </Typography>
+            {selectedUser && (
+              <Box className="users-drawer_table">
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    First name
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {selectedUser.first_name}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    Last name
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {selectedUser.last_name}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    Role
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {selectedUser.role === 'admin' ? 'Administrator' : '-'}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    Email
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {selectedUser.email}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    Date created
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {formatDateWithClock(selectedUser.date_created)}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography className="users-drawer_table_title">
+                    Last login
+                  </Typography>
+                  <Typography className="users-drawer_table_text">
+                    {formatDateWithClock(selectedUser.last_login)}
+                  </Typography>
+                </Box>
               </Box>
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  Role
-                </Typography>
-                <Typography className="users-drawer_table_text">
-                  {selectedUser.role === 'admin' ? 'Administrator' : '-'}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  Email
-                </Typography>
-                <Typography className="users-drawer_table_text">
-                  {selectedUser.email}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  Date created
-                </Typography>
-                <Typography className="users-drawer_table_text">
-                  {formatDateWithClock(selectedUser.date_created)}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography className="users-drawer_table_title">
-                  Last login
-                </Typography>
-                <Typography className="users-drawer_table_text">
-                  {formatDateWithClock(selectedUser.last_login)}
-                </Typography>
+            )}
+            <Typography
+              className="custom-drawer_title"
+              sx={{ marginTop: '32px' }}
+            >
+              Activity
+            </Typography>
+            <Box className="users-drawer_activity">
+              <Box className="users-drawer_activity--empty">
+                <Typography>No activity yet</Typography>
               </Box>
             </Box>
-          )}
+          </Box>
         </Box>
       </Drawer>
     </>

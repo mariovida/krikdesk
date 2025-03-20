@@ -154,7 +154,7 @@ const LoginPage = () => {
             </Box>
             <Box className="right-part_box">
               <Typography variant="h4">
-                {i18n.t('login')}{' '}
+                {i18n.t('login')}
                 {showSpinner && <span className="spinner"></span>}
               </Typography>
               <form onSubmit={handleLogin}>

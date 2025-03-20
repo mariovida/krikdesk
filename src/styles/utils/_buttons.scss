@@ -1,0 +1,24 @@
+.vx-button {
+  font-family: 'Plus Jakarta Sans';
+  font-size: $fs-15;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: none;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    background-color 0.2s;
+
+  &--primary {
+    color: $white;
+    background-color: $blue;
+    border-color: $blue;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

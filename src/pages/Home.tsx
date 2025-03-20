@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   TextField,
+  Box,
   Select,
   MenuItem,
   Button,
@@ -19,6 +20,8 @@ const Home: React.FC = () => {
   const [assignee, setAssignee] = useState('');
   const [priority, setPriority] = useState('Medium');
   const [message, setMessage] = useState('');
+  const [projects, setProjects] = useState<any[]>([]);
+  const [selectedProject, setSelectedProject] = useState<string>('');
 
   /* useEffect(() => {
     const fetchUsers = async () => {
@@ -33,6 +36,19 @@ const Home: React.FC = () => {
     fetchUsers();
   }, []); */
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/get-projects');
+        setProjects(response.data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -42,6 +58,7 @@ const Home: React.FC = () => {
         description,
         assignee,
         priority,
+        selectedProject,
       });
 
       setMessage(response.data.message);
@@ -49,6 +66,7 @@ const Home: React.FC = () => {
       setDescription('');
       setAssignee('');
       setPriority('Medium');
+      setSelectedProject('');
     } catch (error) {
       setMessage('Error creating task.');
       console.error(error);
@@ -65,95 +83,79 @@ const Home: React.FC = () => {
         <div className="wrapper">
           <div className="row">
             <div className="col-12">
-              <h1>Home page</h1>
-            </div>
-            <div className="col-12">
               <form onSubmit={handleSubmit}>
-                <div>
-                  {/* <TextField
+                <Box className="form-fields">
+                  <TextField
                     label={t('create-ticket-title')}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    required
                     fullWidth
                     variant="filled"
-                    className="custom-input"
+                    required
                   />
                   <TextField
                     label={t('create-ticket-description')}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    required
-                    multiline
-                    rows={3}
                     fullWidth
                     variant="filled"
-                  />
-                  <FormControl fullWidth required variant="filled">
-                    <InputLabel>{t('create-ticket-assignee')}</InputLabel>
-                    <Select
-                      value={assignee}
-                      onChange={(e) => setAssignee(e.target.value)}
-                    >
-                      <MenuItem value="">Select an Assignee</MenuItem>
-                      <MenuItem value="8efe864c-4b11-42bb-875a-98b6bf0cf5ff">
-                        Mario
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                  <FormControl fullWidth required variant="filled">
-                    <InputLabel>{t('create-ticket-priority')}</InputLabel>
-                    <Select
-                      value={priority}
-                      onChange={(e) => setPriority(e.target.value)}
-                    >
-                      <MenuItem value="Low">Low</MenuItem>
-                      <MenuItem value="Medium">Medium</MenuItem>
-                      <MenuItem value="High">High</MenuItem>
-                    </Select>
-                  </FormControl> */}
-                  <label>{t('create-ticket-title')}</label>
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
                     required
+                    multiline
                   />
-                </div>
-                <div>
-                  <label>{t('create-ticket-description')}</label>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <label>{t('create-ticket-assignee')}</label>
-                  <select
-                    value={assignee}
-                    onChange={(e) => setAssignee(e.target.value)}
-                    required
+                  <Box sx={{ display: 'flex', gap: '16px' }}>
+                    <FormControl fullWidth required variant="filled">
+                      <InputLabel>{t('create-ticket-assignee')}</InputLabel>
+                      <Select
+                        value={assignee}
+                        onChange={(e) => setAssignee(e.target.value)}
+                      >
+                        <MenuItem value="">Select an Assignee</MenuItem>
+                        <MenuItem value="8efe864c-4b11-42bb-875a-98b6bf0cf5ff">
+                          Mario
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                    <FormControl fullWidth required variant="filled">
+                      <InputLabel>{t('create-ticket-priority')}</InputLabel>
+                      <Select
+                        value={priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                      >
+                        <MenuItem value="Low">Low</MenuItem>
+                        <MenuItem value="Medium">Medium</MenuItem>
+                        <MenuItem value="High">High</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <FormControl fullWidth required variant="filled">
+                      <InputLabel>{t('create-ticket-project')}</InputLabel>
+                      <Select
+                        value={selectedProject}
+                        onChange={(e) => setSelectedProject(e.target.value)}
+                      >
+                        <MenuItem value="">Select a Project</MenuItem>
+                        {projects.map((project) => (
+                          <MenuItem key={project.id} value={project.id}>
+                            {project.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    marginTop: '24px',
+                  }}
+                >
+                  <button
+                    type="submit"
+                    className="vx-button vx-button--primary"
                   >
-                    <option value="">Select an Assignee</option>
-                    <option value="8efe864c-4b11-42bb-875a-98b6bf0cf5ff">
-                      Mario
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <label>{t('create-ticket-priority')}</label>
-                  <select
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    required
-                  >
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                  </select>
-                </div>
-                <button type="submit">{t('create-ticket-submit')}</button>
+                    {t('create-ticket-submit')}
+                  </button>
+                </Box>
               </form>
               {message && <p>{message}</p>}
             </div>
