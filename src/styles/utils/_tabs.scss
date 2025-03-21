@@ -1,0 +1,41 @@
+.custom-tabs {
+  &_box {
+    background-color: $white;
+    border-radius: 16px;
+    box-shadow:
+      rgba(0, 0, 0, 0.04) 0px 5px 22px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+    .MuiTabs-root {
+      min-height: unset;
+      padding: 20px 16px;
+      border-bottom: 1px solid $gray;
+
+      .MuiTabs-list {
+        gap: 16px;
+
+        .Mui-selected {
+          color: $blue;
+          background-color: $background-color;
+        }
+      }
+
+      .MuiTab-root {
+        min-width: unset;
+        min-height: unset;
+        font-family: 'Plus Jakarta Sans';
+        font-weight: 500;
+        text-transform: none;
+        color: $text-color;
+        padding: 10px 16px;
+        border: 1px solid $gray;
+        border-radius: 6px;
+      }
+
+      .MuiTabs-indicator {
+        height: 0;
+        display: none;
+      }
+    }
+  }
+}
