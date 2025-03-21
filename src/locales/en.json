@@ -14,6 +14,7 @@
   "nav-home": "Home",
   "nav-projects": "Projects",
   "nav-users": "Users",
+  "nav-administration": "Administration",
   "create-ticket-title": "Title",
   "create-ticket-description": "Description",
   "create-ticket-assignee": "Assignee",

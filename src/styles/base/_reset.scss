@@ -30,6 +30,22 @@ button,
   color: $error-red;
 }
 
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+  }
+
+  button {
+    background-color: $blue-dark;
+    border-radius: 8px;
+    padding: 14px 20px;
+  }
+}
+
 // Language menu
 .lang-menu,
 .user-menu {
@@ -66,16 +82,19 @@ button,
 
 .user-menu {
   .MuiPaper-root {
-    min-width: 240px;
+    min-width: 250px;
 
     .MuiList-root {
-      padding: 12px !important;
+      padding: 14px 14px 8px 14px !important;
+
+      li {
+        font-weight: 500;
+        padding: 8px 8px;
+      }
 
       li:last-child {
         display: block;
-        font-weight: 500;
         text-align: center;
-        margin-top: 10px;
       }
     }
   }

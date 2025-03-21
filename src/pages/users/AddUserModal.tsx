@@ -194,7 +194,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               <MenuItem value="developer">Developer</MenuItem>
               <MenuItem value="designer">Designer</MenuItem>
               <MenuItem value="client">Client</MenuItem>
-              <MenuItem value="reporter">Account manager</MenuItem>
+              <MenuItem value="reporter">Manager</MenuItem>
             </Select>
           </FormControl>
         </Box>

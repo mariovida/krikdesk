@@ -20,7 +20,7 @@ const LoginPage = () => {
   }
 
   const { i18n } = useTranslation();
-  const { setUser } = useUser();
+  const { setUser, setRole } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorVerification, setErrorVerification] = useState(false);
@@ -83,6 +83,7 @@ const LoginPage = () => {
       setErrorDisabled(false);
       setError(false);
       setUser(data.user);
+      setRole(null);
       setShowSpinner(true);
       setTimeout(() => {
         setShowSpinner(false);

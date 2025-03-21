@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Menu,
@@ -60,7 +60,6 @@ const TopHeader: React.FC = () => {
                   <p>{user?.email}</p>
                 </Box>
                 <Divider />
-                <MenuItem>Settings</MenuItem>
                 <MenuItem>Account</MenuItem>
                 <Divider />
                 <MenuItem onClick={handleLogout}>Sign out</MenuItem>

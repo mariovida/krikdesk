@@ -232,7 +232,9 @@ const Users: React.FC = () => {
                                 >
                                   {user.role === 'admin'
                                     ? 'Administrator'
-                                    : 'N/A'}
+                                    : user.role === 'developer'
+                                      ? 'Developer'
+                                      : 'N/A'}
                                 </Box>
                               </TableCell>
                               <TableCell>{user.email}</TableCell>
@@ -361,7 +363,11 @@ const Users: React.FC = () => {
                     Role
                   </Typography>
                   <Typography className="users-drawer_table_text">
-                    {selectedUser.role === 'admin' ? 'Administrator' : '-'}
+                    {selectedUser.role === 'admin'
+                      ? 'Administrator'
+                      : selectedUser.role === 'developer'
+                        ? 'Developer'
+                        : '-'}
                   </Typography>
                 </Box>
                 <Box>

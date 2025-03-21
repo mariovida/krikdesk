@@ -9,7 +9,7 @@ const LoginPage = lazy(() => import('../pages/Login'));
 const SetPasswordPage = lazy(() => import('../pages/SetPasswordPage'));
 
 const HomePage = lazy(() => import('../pages/Home'));
-const ProjectsPage = lazy(() => import('../pages/Projects'));
+const ProjectsPage = lazy(() => import('../pages/projects/Projects'));
 const UsersPage = lazy(() => import('../pages/users/Users'));
 
 const routes: RouteObject[] = [

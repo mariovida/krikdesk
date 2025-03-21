@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import { useUser } from '../../context/UserContext';
+import AddProjectModal from './AddProjectModal';
 
 import { Box, Typography } from '@mui/material';
 
@@ -11,9 +13,15 @@ const Projects: React.FC = () => {
   }
 
   const [loading, setLoading] = useState<boolean>(true);
+  const { role } = useUser();
   const [projects, setProjects] = useState<any[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const [openModal, setOpenModal] = useState(false);
+  const [name, setName] = useState('');
+  const [projectId, setProjectId] = useState('');
+  const [selectedProject, setSelectedProject] = useState('');
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -41,6 +49,21 @@ const Projects: React.FC = () => {
     setFilteredProjects(filtered);
   };
 
+  const handleOpenCreateUserModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => setOpenModal(false);
+  const handleCreateUser = async () => {
+    const newProject = {
+      name: name,
+      id: projectId,
+      project: selectedProject,
+    };
+
+    console.log(newProject);
+    return;
+  };
+
   return (
     <>
       <Helmet>
@@ -51,7 +74,17 @@ const Projects: React.FC = () => {
         <div className="wrapper">
           <div className="row">
             <div className="col-12">
-              <h1>Projects</h1>
+              <div className="page-title">
+                <h1>Projects</h1>
+                {role && role === 'admin' ? (
+                  <button
+                    className="vx-button vx-button--primary"
+                    onClick={handleOpenCreateUserModal}
+                  >
+                    Add new
+                  </button>
+                ) : null}
+              </div>
             </div>
             <div className="col-12">
               <div className="table-custom_box">
@@ -110,24 +143,26 @@ const Projects: React.FC = () => {
                             <Typography>0</Typography>
                           </Box>
                         </Box>
-                        <Box className="table-custom_list--info">
-                          <Box>
-                            <Typography>Clients</Typography>
-                            <Typography>0</Typography>
+                        {role && role === 'admin' ? (
+                          <Box className="table-custom_list--info">
+                            <Box>
+                              <Typography>Clients</Typography>
+                              <Typography>0</Typography>
+                            </Box>
+                            <Box>
+                              <Typography>Developers</Typography>
+                              <Typography>0</Typography>
+                            </Box>
+                            <Box>
+                              <Typography>Designers</Typography>
+                              <Typography>0</Typography>
+                            </Box>
+                            <Box>
+                              <Typography>Managers</Typography>
+                              <Typography>0</Typography>
+                            </Box>
                           </Box>
-                          <Box>
-                            <Typography>Developers</Typography>
-                            <Typography>0</Typography>
-                          </Box>
-                          <Box>
-                            <Typography>Designers</Typography>
-                            <Typography>0</Typography>
-                          </Box>
-                          <Box>
-                            <Typography>Account managers</Typography>
-                            <Typography>0</Typography>
-                          </Box>
-                        </Box>
+                        ) : null}
                         <button className="vx-button vx-button--primary">
                           VIEW TICKETS
                         </button>
@@ -140,6 +175,19 @@ const Projects: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <AddProjectModal
+        open={openModal}
+        onClose={handleCloseModal}
+        onSubmit={handleCreateUser}
+        name={name}
+        id={projectId}
+        project={selectedProject}
+        setName={setName}
+        setId={setProjectId}
+        setProject={setSelectedProject}
+        projects={projects}
+      />
     </>
   );
 };

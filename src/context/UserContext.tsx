@@ -11,11 +11,14 @@ interface User {
   last_name: string;
   email: string;
   username: string;
+  token: string;
 }
 
 interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  role: string | null;
+  setRole: (role: string | null) => void;
   logout: () => void;
 }
 
@@ -23,22 +26,67 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<string | null>(null);
+
+  let backendUrl = import.meta.env.VITE_BACKEND_URL;
+  if (import.meta.env.VITE_ENV === 'production') {
+    backendUrl = import.meta.env.VITE_BACKEND_URL_PROD;
+  }
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('Error parsing stored user:', error);
+      }
     }
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      const accessToken = localStorage.getItem('accessToken');
+      const fetchUserRole = async () => {
+        const token = user.token;
+
+        try {
+          const response = await fetch(
+            `${backendUrl}/api/users/user-role?token=${encodeURIComponent(token)}`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            setRole(data.role);
+          } else {
+            console.error('Error fetching role:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error fetching role:', error);
+        }
+      };
+
+      fetchUserRole();
+    }
+  }, [user, backendUrl]);
+
   const logout = () => {
     setUser(null);
+    setRole(null);
     localStorage.removeItem('user');
-    localStorage.removeItem('accessToken'); // Make sure to remove any tokens too
+    localStorage.removeItem('accessToken');
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, logout }}>
+    <UserContext.Provider value={{ user, setUser, role, setRole, logout }}>
       {children}
     </UserContext.Provider>
   );

@@ -9,7 +9,7 @@ import usaFlag from '../assets/flag-usa.png';
 
 const Header: React.FC = () => {
   const { i18n } = useTranslation();
-  const { setUser } = useUser();
+  const { role, setUser } = useUser();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const currentLanguage = i18n.language;
@@ -50,7 +50,12 @@ const Header: React.FC = () => {
               <div>
                 <NavLink to="/">{i18n.t('nav-home')}</NavLink>
                 <NavLink to="/projects">{i18n.t('nav-projects')}</NavLink>
-                <NavLink to="/users">{i18n.t('nav-users')}</NavLink>
+                {role && role === 'admin' ? (
+                  <>
+                    <NavLink to="/users">{i18n.t('nav-users')}</NavLink>
+                    <NavLink to="/">{i18n.t('nav-administration')}</NavLink>
+                  </>
+                ) : null}
                 {/* <button onClick={handleLogout}>{i18n.t('logout')}</button> */}
               </div>
               <div className="header_lang">
