@@ -11,6 +11,9 @@ const SetPasswordPage = lazy(() => import('../pages/SetPasswordPage'));
 const HomePage = lazy(() => import('../pages/Home'));
 const ProjectsPage = lazy(() => import('../pages/projects/Projects'));
 const UsersPage = lazy(() => import('../pages/users/Users'));
+const AdministrationPage = lazy(
+  () => import('../pages/administration/AdministrationPage')
+);
 
 const routes: RouteObject[] = [
   {
@@ -45,6 +48,10 @@ const routes: RouteObject[] = [
       {
         path: 'users',
         element: <UsersPage />,
+      },
+      {
+        path: 'administration',
+        element: <AdministrationPage />,
       },
     ],
   },
