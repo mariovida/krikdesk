@@ -70,7 +70,7 @@ const Projects: React.FC = () => {
         <title>Projects | KrikDesk</title>
       </Helmet>
 
-      <section className="table-custom">
+      <section>
         <div className="wrapper">
           <div className="row">
             <div className="col-12">
@@ -86,6 +86,13 @@ const Projects: React.FC = () => {
                 ) : null}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="table-custom">
+        <div className="wrapper">
+          <div className="row">
             <div className="col-12">
               <div className="table-custom_box">
                 <div className="table-custom_head">
