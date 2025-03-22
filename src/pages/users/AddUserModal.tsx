@@ -24,10 +24,12 @@ interface AddUserModalProps {
   }) => void;
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   role: string;
   setFirstName: React.Dispatch<React.SetStateAction<string>>;
   setLastName: React.Dispatch<React.SetStateAction<string>>;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setRole: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -38,10 +40,12 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   onSubmit,
   firstName,
   lastName,
+  username,
   email,
   role,
   setFirstName,
   setLastName,
+  setUsername,
   setEmail,
   setRole,
 }) => {
@@ -49,19 +53,27 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     first_name: '',
     last_name: '',
     email: '',
+    username: '',
     role: '',
   });
 
   useEffect(() => {
     setFirstName('');
     setLastName('');
+    setUsername('');
     setEmail('');
     setRole('');
-  }, [setFirstName, setLastName, setEmail]);
+  }, [setFirstName, setLastName, setEmail, setUsername]);
 
   const validateFields = () => {
     let isValid = true;
-    const newErrors = { first_name: '', last_name: '', email: '', role: '' };
+    const newErrors = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      role: '',
+      username: '',
+    };
 
     if (!firstName.trim()) {
       newErrors.first_name = 'First name is required.';
@@ -76,6 +88,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
       isValid = false;
     } else if (lastName.length > 50) {
       newErrors.last_name = 'Last name must be less than 50 characters.';
+      isValid = false;
+    }
+
+    if (!username.trim()) {
+      newErrors.username = 'Username is required.';
       isValid = false;
     }
 
@@ -100,6 +117,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     const { name, value } = e.target;
     if (name === 'first_name') setFirstName(value);
     if (name === 'last_name') setLastName(value);
+    if (name === 'username') setUsername(value);
     if (name === 'email') setEmail(value);
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
@@ -117,7 +135,13 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   };
 
   const handleClose = () => {
-    setErrors({ first_name: '', last_name: '', email: '', role: '' });
+    setErrors({
+      first_name: '',
+      last_name: '',
+      email: '',
+      role: '',
+      username: '',
+    });
     setFirstName('');
     setLastName('');
     setEmail('');
@@ -126,7 +150,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   };
 
   const isSaveDisabled =
-    firstName === '' || lastName === '' || email === '' || !role;
+    firstName === '' ||
+    lastName === '' ||
+    email === '' ||
+    username === '' ||
+    !role;
 
   return (
     <Dialog
@@ -165,6 +193,17 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             fullWidth
             variant="filled"
             inputProps={{ maxLength: 50 }}
+            required
+          />
+          <TextField
+            label="Username"
+            name="username"
+            value={username}
+            onChange={handleInputChange}
+            error={!!errors.last_name}
+            helperText={errors.username}
+            fullWidth
+            variant="filled"
             required
           />
           <TextField
