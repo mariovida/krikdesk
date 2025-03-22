@@ -38,6 +38,7 @@ const Users: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
 
@@ -108,6 +109,7 @@ const Users: React.FC = () => {
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
     setSelectedUser(null);
+    setConfirmOpen(false);
   };
 
   const handleOpenConfirm = () => {
@@ -125,11 +127,9 @@ const Users: React.FC = () => {
       first_name: firstName,
       last_name: lastName,
       email: email,
+      username: username,
       role: role,
     };
-
-    console.log(newUser);
-    return;
 
     try {
       const token = localStorage.getItem('accessToken');
@@ -155,6 +155,7 @@ const Users: React.FC = () => {
         setFirstName('');
         setLastName('');
         setEmail('');
+        setUsername('');
 
         window.location.reload();
       }
@@ -169,12 +170,21 @@ const Users: React.FC = () => {
         <title>{i18n.t('nav-users')} | KrikDesk</title>
       </Helmet>
 
-      <section className="table-custom">
+      <section>
         <div className="wrapper">
           <div className="row">
             <div className="col-12">
-              <h1>Users</h1>
+              <div className="page-title">
+                <h1>Users</h1>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="table-custom">
+        <div className="wrapper">
+          <div className="row">
             <div className="col-12">
               <div className="table-custom_box">
                 <div className="table-custom_head">
@@ -196,7 +206,7 @@ const Users: React.FC = () => {
                     <Table stickyHeader>
                       <TableHead>
                         <TableRow>
-                          <TableCell sx={{ width: '100px' }}>Status</TableCell>
+                          <TableCell sx={{ width: '110px' }}>Status</TableCell>
                           <TableCell sx={{ width: '300px' }}>Name</TableCell>
                           <TableCell>Email</TableCell>
                           <TableCell>Last login</TableCell>
@@ -281,10 +291,12 @@ const Users: React.FC = () => {
         onSubmit={handleCreateUser}
         firstName={firstName}
         lastName={lastName}
+        username={username}
         email={email}
         role={role}
         setFirstName={setFirstName}
         setLastName={setLastName}
+        setUsername={setUsername}
         setEmail={setEmail}
         setRole={setRole}
       />
