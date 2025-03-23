@@ -154,6 +154,7 @@ const SetPasswordPage = () => {
                   lineHeight: '22px',
                   marginTop: '6px',
                   marginBottom: '24px',
+                  color: '#737373',
                 }}
               >
                 Create a password for your account.
