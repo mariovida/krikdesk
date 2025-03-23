@@ -63,6 +63,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             }
           );
 
+          if (response && response.status && response.status === 403) {
+            logout();
+          }
+
           if (response.ok) {
             const data = await response.json();
             setRole(data.role);
