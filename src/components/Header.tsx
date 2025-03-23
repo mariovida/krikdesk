@@ -53,7 +53,9 @@ const Header: React.FC = () => {
                 {role && role === 'admin' ? (
                   <>
                     <NavLink to="/users">{i18n.t('nav-users')}</NavLink>
-                    <NavLink to="/">{i18n.t('nav-administration')}</NavLink>
+                    <NavLink to="/administration">
+                      {i18n.t('nav-administration')}
+                    </NavLink>
                   </>
                 ) : null}
                 {/* <button onClick={handleLogout}>{i18n.t('logout')}</button> */}
